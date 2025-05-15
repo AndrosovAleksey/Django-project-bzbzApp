@@ -1,0 +1,136 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid mt-5">
+
+    <!-- Форма выбора аккаунта -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10 p-4 bg-white shadow rounded">
+            <form method="get" id="account-selection-form" class="row g-3">
+                <h3 class="mb-4">Выбор аккаунта</h3>
+
+                <!-- Выпадающий список аккаунтов -->
+                <div class="col-md-6">
+                    <label for="id_account" class="form-label">Аккаунт</label>
+                    <select class="form-select" id="id_account" name="account">
+                        <option value="">Выберите аккаунт</option>
+                        {% for account in accounts %}
+                            <option value="{{ account.id }}" {% if request.GET.account == account.id|stringformat:"s" %}selected{% endif %}>
+                                {{ account.account_number }} ({{ account.token|truncatechars:16 }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Кнопка "Применить" -->
+                <div class="col-md-6 d-flex align-items-end justify-content-end">
+                    <button type="submit" class="btn btn-lg btn-custom-2">Применить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Сообщение об ошибке -->
+    {% if error %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+
+    <!-- Диаграмма прибыли/убытков -->
+    {% if chart_html %}
+    <div class="row justify-content-center mx-4 my-4">
+        <div class="col-12">
+            {{ chart_html|safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Таблица доходов и расходов -->
+    {% if table_data %}
+    <div class="container-fluid offset-md-1 col-md-10 mt-2 mb-4 p-2">
+        <h1>Детальная информация</h1>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">FIGI</th>
+                    <th scope="col">Кол</th>
+                    <th scope="col">Expected Yield</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Average Buy Price</th>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Sell Sum</th>
+                    <th scope="col">Commission</th>
+                    <th scope="col">Tax</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                <tr>
+                    <td>{{ row.figi }}</td>
+                    <td>{{ row.quantity }}</td>
+                    <td>{{ row.expected_yield|floatformat:2 }}</td>
+                    <td>{{ row.instrument_type }}</td>
+                    <td>{{ row.average_buy_price|floatformat:2 }}</td>
+                    <td>{{ row.currency }}</td>
+                    <td>{{ row.sell_sum|floatformat:2 }}</td>
+                    <td>{{ row.comission|floatformat:2 }}</td>
+                    <td>{{ row.tax|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!--Пагинация-->
+        {% if page_obj.has_other_pages %}
+        <nav aria-label="Page navigation" class="paginator">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ query_params }}&page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <span class="page-link paginator-bar">
+                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true" >&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="container-fluid padding mt-4">
+        <div class="row text-center">
+          <div class="col-sm-6 offset-md-3">
+            <img src="{% static 'core/images/gif-cat.gif' %}" class="gif">
+          </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

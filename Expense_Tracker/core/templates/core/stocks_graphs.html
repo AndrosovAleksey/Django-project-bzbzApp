@@ -1,0 +1,172 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Форма -->
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <!-- Основной контейнер формы с отступами и тенью -->
+            <div class="col-lg-10 col-md-12 p-3 bg-white shadow rounded">
+                <form method="post" class="row g-3">
+                    {% csrf_token %}
+
+                    <!-- Заголовок -->
+                    <div class="row justify-content-center text-center my-4">
+                        <div class="col-sm-12 col-lg-12 col-xl-12 col-md-12">
+                            <div class="alert alert-custom text-center" role="alert">
+                                <h1 class="display-3">{{symbol}} | {{end_day}}</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Поле 1: Дата окончания -->
+                    <div class="col-md-6">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="end_date" value="{{ form.end_date.value|default_if_none:'' }}">
+                        {% if form.end_date.errors %}
+                            <div class="text-danger">{{ form.end_date.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле 2: Продолжительность -->
+                    <div class="col-md-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <select class="form-select" id="duration" name="duration">
+                            <option value="1_hour" {% if form.duration.value == '1_hour' %}selected{% endif %}>1 Hour</option>
+                            <option value="1_day" {% if form.duration.value == '1_day' %}selected{% endif %}>1 Day</option>
+                            <option value="1_week" {% if form.duration.value == '1_week' %}selected{% endif %}>1 Week</option>
+                            <option value="1_month" {% if form.duration.value == '1_month' %}selected{% endif %}>1 Month</option>
+                            <option value="1_year" {% if form.duration.value == '1_year' %}selected{% endif %}>1 Year</option>
+                        </select>
+                        {% if form.duration.errors %}
+                            <div class="text-danger">{{ form.duration.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле 3: Гранулярность данных -->
+                    <div class="col-md-3">
+                        <label for="granularity" class="form-label">Data Granularity</label>
+                        <select class="form-select" id="granularity" name="granularity">
+                            <option value="1" {% if form.granularity.value == '1' %}selected{% endif %}>1 Minute</option>
+                            <option value="5" {% if form.granularity.value == '5' %}selected{% endif %}>5 Minutes</option>
+                            <option value="15" {% if form.granularity.value == '15' %}selected{% endif %}>15 Minutes</option>
+                            <option value="60" {% if form.granularity.value == '60' %}selected{% endif %}>1 Hour</option>
+                            <option value="1440" {% if form.granularity.value == '1440' %}selected{% endif %}>1 Day</option>
+                        </select>
+                        {% if form.granularity.errors %}
+                            <div class="text-danger">{{ form.granularity.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле 4: Выбор -->
+                    <!-- Объединенное поле -->
+                    <div class="col-md-10">
+                        <label for="asset-search" class="form-label">Select Asset:</label>
+                        <div class="dropdown">
+                            <!-- Поле ввода с поиском -->
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Выберете актив..."
+                                id="asset-search"
+                                data-bs-toggle="dropdown"
+                            />
+
+                            <!-- Скрытые поля для отправки значений -->
+                            <input type="hidden" name="stock_figi" id="stock_figi">
+                            <input type="hidden" name="bond_figi" id="bond_figi">
+
+                            <!-- Выпадающий список с колонками -->
+                            <div class="dropdown-menu dropdown-stocks-menu dropdown-auto-width">
+                                <div class="row m-0">
+                                    <!-- Колонка акций -->
+                                    <div class="col-6">
+                                        <h6 class="dropdown-header">Акции</h6>
+                                        {% for stock in form.stock_figi.field.choices %}
+                                            <button
+                                                type="button"
+                                                class="dropdown-item asset-item text-truncate"
+                                                data-type="stock"
+                                                data-value="{{ stock.0 }}"
+                                            >
+                                                {{ stock.1 }}
+                                            </button>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- Колонка облигаций -->
+                                    <div class="col-6">
+                                        <h6 class="dropdown-header">Облигации</h6>
+                                        {% for bond in form.bond_figi.field.choices %}
+                                            <button
+                                                type="button"
+                                                class="dropdown-item asset-item text-truncate"
+                                                data-type="bond"
+                                                data-value="{{ bond.0 }}"
+                                            >
+                                                {{ bond.1 }}
+                                            </button>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вывод ошибок -->
+                        <div class="text-danger">
+                            {% if form.stock_figi.errors %}Поле акций: {{ form.stock_figi.errors }}{% endif %}
+                            {% if form.bond_figi.errors %}Поле облигаций: {{ form.bond_figi.errors }}{% endif %}
+                        </div>
+                    </div>
+                    <!-- Кнопка "Применить" -->
+                    <div class="col-md-2 d-flex align-items-end justify-content-center">
+                        <button type="submit" class="btn btn-lg btn-custom-2">
+                            Применить
+                        </button>
+                    </div>
+                    <!-- Вывод ошибок -->
+                    {% if form.non_field_errors %}
+                    <div class="container-fluid col-md-12 d-flex justify-content-start">
+                        <div class="row alert alert-danger mt-3 mx-0 px-3 w-100">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- График -->
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-center mx-4">
+            <div class="col-12">
+                {{ stock_candlestick|safe }}
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- Информация о выбранной ценной бумаге -->
+    <div class="row col-md-10 offset-md-1 mb-4">
+        <div class="container-fluid">
+            <h1 class="display-6">
+                {{ instrument_name }}: подробная информация
+            </h1>
+            <hr>
+            <p><strong>Type:</strong> {{ instrument_type }}</p>
+            <p><strong>Currency:</strong> {{ currency }}</p>
+            <p><strong>Sector:</strong> {{ sector }}</p>
+            <p><strong>Exchange:</strong> {{ exchange }}</p>
+            <p><strong>Nominal:</strong> {{ nominal }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

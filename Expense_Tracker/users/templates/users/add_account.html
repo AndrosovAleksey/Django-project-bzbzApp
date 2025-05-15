@@ -1,0 +1,49 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card shadow-lg p-3 bg-light col-xs-10 col-md-6 offset-xs-1 offset-md-3">
+    <div class="card-body">
+        <h1 class="fw-normal text-center h2 mb-4">Добавить счет</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Отображение глобальных ошибок -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger my-3" role="alert">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Поля формы -->
+            {% for f in form %}
+            <div class="form-floating mb-3">
+                <input
+                    type="{{ f.field.widget.input_type }}"
+                    class="form-control"
+                    id="{{ f.id_for_label }}"
+                    name="{{ f.html_name }}"
+                    placeholder="{{ f.label }}"
+                    value="{{ f.value|default_if_none:'' }}"
+                >
+                <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+            </div>
+            <div class="form-error text-danger mb-3">{{ f.errors }}</div>
+            {% endfor %}
+
+            <!-- Кнопка сохранения -->
+            <div class="text-center col-md-6 offset-md-3">
+                <button class="w-100 btn btn-lg btn-custom-2" type="submit">Добавить</button>
+            </div>
+        </form>
+
+        <!-- Ссылка на профиль -->
+        <div class="my-3 text-center">
+            <a href="{% url 'users:profile' %}" class="text-decoration-none">Вернуться в профиль</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

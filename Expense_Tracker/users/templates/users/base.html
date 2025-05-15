@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JS -->
+    <script src="{% static 'users/fontawesomefree/js/all.min.js' %}"></script>
+    <script src="{% static 'users/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'users/fontawesomefree/css/all.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'users/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+
+    <title>{{ title }}</title>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100 bg-dark">
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

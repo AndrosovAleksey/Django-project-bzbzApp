@@ -1,0 +1,60 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<div class="card shadow-lg px-3 pt-3 bg-light col-xs-10 col-md-6 offset-xs-1 offset-md-3">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            <h1 class="fw-normal text-center h2 mb-4">Добро пожаловать!</h1>
+
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="{{ form.username.id_for_label }}"
+                name="{{ form.username.html_name }}"
+                placeholder="Логин или email">
+              <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="{{ form.password.id_for_label }}"
+                name="{{ form.password.html_name }}"
+                placeholder="Password">
+              <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            </div>
+
+            <!-- Отображение глобальных ошибок -->
+            {% if form.non_field_errors %}
+            <div class="container-fluid col-md-12 d-flex justify-content-start">
+                <div class="row alert alert-danger mt-3 mx-0 px-3 w-100">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="checkbox my-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Запомнить
+              </label>
+            </div>
+            <div class="text-center col-md-4 offset-md-4">
+                <!-- Кастомная кнопка -->
+                <button class="w-100 btn btn-lg btn-custom-2" type="submit">Войти</button>
+            </div>
+
+            <!-- Ссылка на регистрацию -->
+            <div class="text-center my-3">
+                <a href="{% url 'users:register' %}" class="text-decoration-none">Еще нет аккаунта? Зарегистрируйтесь!</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

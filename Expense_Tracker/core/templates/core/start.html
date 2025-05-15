@@ -1,0 +1,133 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Карусель -->
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'core/images/carousel_1.jpg' %}"}>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'core/images/carousel_2.jpg' %}"}>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'core/images/carousel_3.jpg' %}"}>
+    </div>
+    <div class="carousel-caption">
+          <h1 class="display-2">Инвестирование</h1>
+          <h3>Приумножьте свой капитал</h3>
+          <button type="button" class="btn btn-light btn-lg">Теория</button>
+          <button type="button" class="btn btn-warning btn-lg">К делу!</button>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- Вводная информация -->
+<div class="container-fluid bg-secondary-subtle">
+  <div class="row jumbotron align-items-center">
+    <div class="col-md-9 col-lg-9 col-xl-10">
+      <p class="lead">
+        {% lorem 1 p %}
+      </p>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xl-2">
+      <a href="#"><button class="btn btn-lg btn-outline-dark">Читать</button></a>
+    </div>
+  </div>
+</div>
+<!-- Что можно делать на сайте -->
+<div class="container-fluid">
+  <div class="row text-center alert">
+    <div class="col-12">
+      <h1 class="display-6">
+        Аналитика
+      </h1>
+      <hr>
+      <p class="lead">
+        {% lorem 2 p  %}
+      </p>
+    </div>
+  </div>
+</div>
+<!-- Что можно делать на сайте (иконки)-->
+<div class="container-fluid padding">
+  <div class="row alert text-center padding">
+    <div class="col-sm-12 col-md-6">
+      <i class="fa-solid fa-money-bill-trend-up"></i>
+      <h3>Price tracking</h3>
+      <p>{% lorem 20 w %}</p>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <i class="fa-solid fa-piggy-bank"></i>
+      <h3>Monitoring personal finances</h3>
+      <p>{% lorem 20 w %}</p>
+    </div>
+    <hr class="my-4">
+  </div>
+</div>
+<!-- Фиксированное изображение -->
+<figure>
+  <div class="fixed-wrap">
+    <div id="fixed">
+
+    </div>
+  </div>
+</figure>
+<!-- Ссылка на статьи???-->
+<div class="container-fluid padding">
+  <br>
+  <div class="row padding">
+    <div class="offset-lg-2 col-lg-4">
+      <h2>Что-то про инвестирование</h2>
+      <p>{% lorem 30 w %}</p>
+      <br>
+      <p>{% lorem 30 w %}</p>
+      <br>
+      <p>{% lorem 30 w %}</p>
+      <a href="#"><button class="btn btn-danger">Читать далее</button></a>
+      <br>
+    </div>
+    <div class="col-lg-4">
+      <br>
+      <img src="{% static 'core/images/investment.jpg'%}" alt="" class="img-fluid">
+    </div>
+  <hr class="my-4">
+  </div>
+</div>
+<!-- Гифки -->
+<div class="text-center">
+  <button type="button" id="gifs-button" class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#gifs">
+    Открыть блок
+  </button>
+</div>
+<div id="gifs" class="collapse">
+  <div class="container-fluid padding">
+    <div class="row text-center">
+      <div class="col-sm-6 col-md-4">
+        <img src="{% static 'core/images/gif-cafe.gif' %}" class="gif">
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <img src="{% static 'core/images/gif-cat.gif' %}" class="gif">
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <img src="{% static 'core/images/gif-witch.gif' %}" class="gif">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

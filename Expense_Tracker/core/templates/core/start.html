@@ -23,8 +23,24 @@
     <div class="carousel-caption">
           <h1 class="display-2">Инвестирование</h1>
           <h3>Приумножьте свой капитал</h3>
-          <button type="button" class="btn btn-light btn-lg">Теория</button>
-          <button type="button" class="btn btn-warning btn-lg">К делу!</button>
+          <a
+                  class="btn btn-light btn-lg btn-custom-theory"
+                  href="https://habr.com/ru/companies/dbtc/articles/527050/"
+                  role="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+          >
+            Теория
+          </a>
+          <a
+                  class="btn btn-light btn-lg btn-custom-doit"
+                  href="https://www.tbank.ru/invest/stocks/"
+                  role="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+          >
+            К делу!
+          </a>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -41,11 +57,21 @@
   <div class="row jumbotron align-items-center">
     <div class="col-md-9 col-lg-9 col-xl-10">
       <p class="lead">
-        {% lorem 1 p %}
+        Для предоставления актуальной информации о котировках акций и облигаций мы
+        используем Tinkoff Invest API — мощный и удобный инструмент, который
+        обеспечивает доступ к данным с биржи в режиме реального времени.
+        Это позволяет вам быть всегда в курсе изменений на рынке и оперативно
+        реагировать на колебания цен.
       </p>
     </div>
     <div class="col-md-3 col-lg-3 col-xl-2">
-      <a href="#"><button class="btn btn-lg btn-outline-dark">Читать</button></a>
+      <a
+              href="https://www.tbank.ru/finance/blog/invest-first-steps/"
+              target="_blank"
+              rel="noopener noreferrer"
+      >
+        <button class="btn btn btn-custom-3">Читать...</button>
+      </a>
     </div>
   </div>
 </div>
@@ -58,7 +84,30 @@
       </h1>
       <hr>
       <p class="lead">
-        {% lorem 2 p  %}
+        В современном мире управление личными финансами и инвестирование
+        становятся неотъемлемой частью финансовой грамотности.
+        Инвестирование позволяет не только сохранить свои сбережения,
+        но и значительно увеличить их со временем.
+        Однако успешное инвестирование требует не только знаний и стратегии,
+        но и постоянного контроля над своими активами.
+        Умение анализировать доходы, расходы и динамику котировок акций и
+        облигаций помогает принимать взвешенные решения и минимизировать риски.
+        Именно поэтому мы создали приложение, которое станет вашим надежным
+        инструментом для управления финансами и отслеживания инвестиций.
+      </p>
+      <p class="lead">
+        Наше приложение предлагает вам полный контроль над вашими финансами:
+        вы можете легко следить за своими доходами и расходами,
+        анализировать транзакции и планировать бюджет.
+        Кроме того, вы получаете доступ к графикам цен на акции и облигации,
+        что делает процесс инвестирования более прозрачным и понятным.
+        Мы стремимся сделать управление финансами максимально удобным,
+        наглядным и эффективным, чтобы вы могли сосредоточиться на
+        достижении своих финансовых целей.
+      </p>
+      <p class="lead">
+        Начните использовать наше приложение уже сегодня и сделайте шаг к стабильному
+        финансовому будущему!
       </p>
     </div>
   </div>
@@ -67,14 +116,18 @@
 <div class="container-fluid padding">
   <div class="row alert text-center padding">
     <div class="col-sm-12 col-md-6">
-      <i class="fa-solid fa-money-bill-trend-up"></i>
-      <h3>Price tracking</h3>
-      <p>{% lorem 20 w %}</p>
+      <a href="{% url 'stocks_graphs'%}">
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+      </a>
+      <h3>Отслеживание цен</h3>
+      <p>Треккинг котировок для своевременного принятия решений с использованием Tinkoff Invest API</p>
     </div>
     <div class="col-sm-12 col-md-6">
-      <i class="fa-solid fa-piggy-bank"></i>
-      <h3>Monitoring personal finances</h3>
-      <p>{% lorem 20 w %}</p>
+      <a href="{% url 'stocks_bag'%}">
+        <i class="fa-solid fa-piggy-bank"></i>
+      </a>
+      <h3>Мой портфель</h3>
+      <p>Мониторинг личного портфеля ценных бумаг в Тинькофф Инвестициях</p>
     </div>
     <hr class="my-4">
   </div>
@@ -93,12 +146,20 @@
   <div class="row padding">
     <div class="offset-lg-2 col-lg-4">
       <h2>Что-то про инвестирование</h2>
-      <p>{% lorem 30 w %}</p>
+      <p>
+        Наше приложение создано для тех, кто хочет взять под контроль свои
+        финансы и уверенно шагнуть в мир инвестирования.
+        Мы сочетаем удобство, надежность и инновационные технологии,
+        чтобы помочь вам достигать своих финансовых целей.
+        Независимо от того, являетесь ли вы начинающим инвестором или
+        опытным финансовым стратегом, наше приложение станет вашим верным
+        помощником на пути к финансовому благополучию.
+      </p>
       <br>
-      <p>{% lorem 30 w %}</p>
-      <br>
-      <p>{% lorem 30 w %}</p>
-      <a href="#"><button class="btn btn-danger">Читать далее</button></a>
+      <p>
+        Начните использовать наше приложение уже сегодня и сделайте шаг
+        к стабильному финансовому будущему!
+      </p>
       <br>
     </div>
     <div class="col-lg-4">
@@ -110,7 +171,7 @@
 </div>
 <!-- Гифки -->
 <div class="text-center">
-  <button type="button" id="gifs-button" class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#gifs">
+  <button type="button" id="gifs-button" class="btn btn-custom-3" data-bs-toggle="collapse" data-bs-target="#gifs">
     Открыть блок
   </button>
 </div>

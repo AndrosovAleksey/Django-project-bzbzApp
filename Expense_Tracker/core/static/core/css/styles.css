@@ -35,16 +35,16 @@ nav {background-color: #3f3f3f !important}
     color: #3f3f3f;
     border-color: #FF6633;
 }
-.btn-custom-2 {
-    background-color: rgba(51, 204, 153, 0.25); /* Мятный 25% */
-    color: #3f3f3f;
-    border-color: rgba(51, 204, 153, 1);
-}
 /* При наведении на кнопку */
 .btn-custom-1:hover {
     background-color: rgba(255, 102, 51, 1);
     border-color: rgba(255, 102, 51, 1);
     color: white;
+}
+.btn-custom-2 {
+    background-color: rgba(51, 204, 153, 0.25); /* Мятный 25% */
+    color: #3f3f3f;
+    border-color: rgba(51, 204, 153, 1);
 }
 .btn-custom-2:hover {
     background-color: rgba(51, 204, 153, 1);
@@ -76,7 +76,41 @@ nav {background-color: #3f3f3f !important}
     background-color: #009966;
     border: none;
     color: white;
+}
 
+.btn-custom-3 {
+    background-color: rgba(63, 63, 63, 0.0);
+    color: #3f3f3f;
+    border-color: rgba(63, 63, 63, 1);
+}
+/* При наведении на кнопку */
+.btn-custom-3:hover {
+    background-color: rgba(63, 63, 63, 1);
+    border-color: rgba(63, 63, 63, 1);
+    color: white;
+}
+
+.btn-custom-theory {
+    background-color: rgba(51, 204, 153, 0.5);
+    color: white;
+    border-color: rgba(51, 204, 153, 1);
+}
+.btn-custom-theory:hover {
+    background-color: rgba(51, 204, 153, 1);
+    border-color: rgba(51, 204, 153, 1);
+    color: white;
+}
+
+.btn-custom-doit {
+    background-color: rgba(255, 102, 51, 0.5); /* Коралловый 25% */
+    color: white;
+    border-color: #FF6633;
+}
+/* При наведении на кнопку */
+.btn-custom-doit:hover {
+    background-color: rgba(255, 102, 51, 1);
+    border-color: rgba(255, 102, 51, 1);
+    color: white;
 }
 
 /* Ползунок */
